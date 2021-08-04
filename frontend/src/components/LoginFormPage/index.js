@@ -51,7 +51,7 @@ const LoginFormPage = () => {
             required
           />
         </label>
-        <Button variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary">
           Log in
         </Button>
       </form>

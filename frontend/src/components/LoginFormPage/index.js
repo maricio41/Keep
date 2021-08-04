@@ -3,6 +3,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import "./LoginForm.css";
 
 const LoginFormPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const LoginFormPage = () => {
   };
 
   return (
-    <section>
+    <section id="login-form-page">
       <form className="login-form" onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, idx) => (

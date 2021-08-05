@@ -1,21 +1,60 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { Note, User } = require("../../db/models");
+const { get } = require("./users");
 
 const router = express.Router();
 
 router.get(
-  "/",
+  "/:id(\\d+)",
   asyncHandler(async (req, res) => {
-    const user = await User.findbyPk();
+    const userId = parseInt(req.params.id, 10);
     const notes = await Note.findAll({
-      //   where: {
-      //     userId,
-      //   },
-      //   include: User,
+      where: {
+        userId,
+      },
+      order: [["createdAt", "asc"]],
+      include: User,
     });
     res.json(notes);
   })
 );
 
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {
+    const { title, content, isPinned } = req.body;
+    const { userId } = req.session.auth;
+    await Note.create({
+      title,
+      content,
+      isPinned,
+      userId,
+    });
+    const userNotes = await Note.findAll({
+      where: {
+        userId,
+      },
+      order: [["createdAt", "asc"]],
+    });
+    res.json(userNotes);
+  })
+);
+
+router.post(
+  "/:noteId(\\dt+)/edit",
+  asyncHandler(async (req, res) => {
+    const { title, content, noteId } = req.body;
+  })
+);
+
+router.delete(
+  "/:noteId(\\dt+)",
+  asyncHandler(async (req, res) => {
+    const noteId = parseInt(req.body.noteId);
+    const note = await Note.findByPk(noteId);
+    await note.destroy();
+    res.json({ message: "Deletion Succesful" });
+  })
+);
 module.exports = router;

@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 
-const GET_NOTES = "notes/getNotes";
+const GET_NOTES = "notes/GET_NOTES";
 
 const setNotes = (notes) => {
   return {
@@ -10,12 +10,13 @@ const setNotes = (notes) => {
 };
 
 export const getUserNotes = (userId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/notes/$userId`);
+  const response = await csrfFetch(`/api/notes/${userId}/usernotes`);
   if (!response.ok) {
     throw response;
+  } else {
+    const notes = await response.json();
+    dispatch(setNotes(notes));
   }
-  const notes = await response.json();
-  dispatch(getNotes(notes));
 };
 
 const initialState = { notes: null };
@@ -26,6 +27,7 @@ const notesReducer = (state = initialState, action) => {
     case GET_NOTES:
       newState = Object.assign({}, state);
       newState.notes = action.payload;
+      return newState;
     default:
       return state;
   }

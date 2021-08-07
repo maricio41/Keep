@@ -1,13 +1,11 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { Note, User } = require("../../db/models");
-const note = require("../../db/models/note");
-const { get } = require("./users");
 
 const router = express.Router();
 
 router.get(
-  "/:id(\\d+)",
+  "/:id(\\d+)/usernotes",
   asyncHandler(async (req, res) => {
     const userId = parseInt(req.params.id, 10);
     const notes = await Note.findAll({

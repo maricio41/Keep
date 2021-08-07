@@ -1,6 +1,7 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { Note, User } = require("../../db/models");
+const note = require("../../db/models/note");
 const { get } = require("./users");
 
 const router = express.Router();
@@ -41,10 +42,17 @@ router.post(
   })
 );
 
-router.post(
+router.patch(
   "/:noteId(\\dt+)/edit",
   asyncHandler(async (req, res) => {
     const { title, content, noteId } = req.body;
+    const note = await Note.findByPk(noteId);
+    const updatedNote = note.update({
+      title: title,
+      content: content,
+    });
+    note.save();
+    res.json(updatedNote);
   })
 );
 

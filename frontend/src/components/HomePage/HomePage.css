@@ -1,0 +1,16 @@
+.homepage-section {
+  height: 100vh;
+}
+
+.homepage-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.note-card {
+  border: 1px solid black;
+  height: 400px;
+  width: 200px;
+  padding: 100px;
+}

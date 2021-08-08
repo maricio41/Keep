@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserNotes } from "../../store/notes";
+import SideBar from "../SideBar";
+import NoteForm from "../NoteForm";
 import "./HomePage.css";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const notes = useSelector((state) => state.notes);
+  const notes = useSelector((state) => state.notes.notes);
   const user = useSelector((state) => state.session.user);
 
   console.log(notes);
@@ -19,12 +21,11 @@ const HomePage = () => {
 
   return (
     <section id="homepage-section">
+      <SideBar />
+      <NoteForm />
       <div className="homepage-container">
-        {notes?.notes.map((note) => (
-          <div className="note-card">
-            <div className="note-title">{note.title}</div>
-            <div className="note-content">{note.content}</div>
-          </div>
+        {notes?.map((notes) => (
+          <div>{notes.title}</div>
         ))}
       </div>
     </section>

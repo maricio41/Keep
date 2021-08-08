@@ -1,5 +1,5 @@
 import "./SideBar.css";
-import { Button } from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button";
 
 const SideBar = () => {
   return (

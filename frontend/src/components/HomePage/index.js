@@ -21,11 +21,18 @@ const HomePage = () => {
 
   return (
     <section id="homepage-section">
-      <SideBar />
-      <NoteForm />
+      <div className="hp-sidebar">
+        <SideBar />
+      </div>
+      <div className="hp-">
+        <NoteForm />
+      </div>
       <div className="homepage-container">
         {notes?.map((notes) => (
-          <div>{notes.title}</div>
+          <div className="note-card">
+            <div className="note-title">{notes.title}</div>
+            <div className="note-content">{notes.content}</div>
+          </div>
         ))}
       </div>
     </section>

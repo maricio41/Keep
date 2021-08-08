@@ -1,11 +1,14 @@
+import "./SideBar.css";
+import { Button } from "@material-ui/core/Button";
+
 const SideBar = () => {
   return (
     <div className="sidebar-container">
       <div>
-        <button>Notes</button>
+        <Button className="note-btn">Notes</Button>
       </div>
       <div>
-        <button>Archive</button>
+        <Button class>Archive</Button>
       </div>
     </div>
   );

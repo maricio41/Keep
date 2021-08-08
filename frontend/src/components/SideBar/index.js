@@ -8,7 +8,7 @@ const SideBar = () => {
         <Button className="note-btn">Notes</Button>
       </div>
       <div>
-        <Button class>Archive</Button>
+        <Button className="archive-btn">Archive</Button>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import "./HomePage.css";
 const HomePage = () => {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.notes.notes);
+  const noteLength = useSelector((state) => state.notes.notes?.length);
   const user = useSelector((state) => state.session.user);
 
   console.log(notes);
@@ -17,7 +18,7 @@ const HomePage = () => {
       return;
     }
     dispatch(getUserNotes(user.id));
-  }, [dispatch]);
+  }, [noteLength, dispatch]);
 
   return (
     <section id="homepage-section">

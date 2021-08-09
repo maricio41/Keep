@@ -1,5 +1,6 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
+const { requireAuth } = require("../../utils/auth");
 const { Note, User } = require("../../db/models");
 
 const router = express.Router();
@@ -21,22 +22,23 @@ router.get(
 
 router.post(
   "/",
+  requireAuth,
   asyncHandler(async (req, res) => {
-    const { title, content, isPinned } = req.body;
-    const { userId } = req.session.auth;
-    await Note.create({
+    const { title, content, isPinned, userId } = req.body;
+
+    const newNote = await Note.create({
       title,
       content,
       isPinned,
       userId,
     });
-    const userNotes = await Note.findAll({
-      where: {
-        userId,
-      },
-      order: [["createdAt", "asc"]],
-    });
-    res.json(userNotes);
+    // const userNotes = await Note.findAll({
+    //   where: {
+    //     userId,
+    //   },
+    //   order: [["createdAt", "asc"]],
+    // });
+    res.json(newNote);
   })
 );
 

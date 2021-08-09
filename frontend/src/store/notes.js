@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_NOTES = "notes/GET_NOTES";
 const ADD_NOTE = "notes/ADD_NOTE";
+const PATCH_NOTE = "notes/PATCH_NOTE";
 
 const setNotes = (notes) => {
   return {
@@ -13,6 +14,12 @@ const setNotes = (notes) => {
 const setNote = (note) => {
   return {
     type: ADD_NOTE,
+    payload: note,
+  };
+};
+const patchNote = (note) => {
+  return {
+    type: PATCH_NOTE,
     payload: note,
   };
 };
@@ -47,6 +54,31 @@ export const addUserNote =
     }
   };
 
+export const pinNote = (noteId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notes/pin`, {
+    method: "PATCH",
+    body: JSON.stringify({ noteId }),
+  });
+  if (!response.ok) {
+    throw response;
+  } else {
+    const note = await response.json();
+    dispatch(patchNote(note));
+  }
+};
+export const unPinNote = (noteId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notes/unpin`, {
+    method: "PATCH",
+    body: JSON.stringify({ noteId }),
+  });
+  if (!response.ok) {
+    throw response;
+  } else {
+    const note = await response.json();
+    dispatch(patchNote(note));
+  }
+};
+
 const initialState = { notes: null };
 
 const notesReducer = (state = initialState, action) => {
@@ -62,6 +94,14 @@ const notesReducer = (state = initialState, action) => {
         newState.notes = [];
       }
       newState.notes.push(action.payload);
+      return newState;
+    case PATCH_NOTE:
+      newState = Object.assign({}, state);
+      newState.notes.forEach((note) => {
+        if (note.id === action.payload.id) {
+          note = action.payload;
+        }
+      });
       return newState;
     default:
       return state;

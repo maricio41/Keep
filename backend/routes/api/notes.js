@@ -65,4 +65,26 @@ router.delete(
     res.json({ message: "Deletion Succesful" });
   })
 );
+
+router.patch(
+  "/pin",
+  asyncHandler(async (req, res) => {
+    const noteId = req.body.noteId;
+    const note = await Note.findByPk(noteId);
+    note.isPinned = true;
+    await note.save();
+    res.json(note);
+  })
+);
+router.patch(
+  "/unpin",
+  asyncHandler(async (req, res) => {
+    const noteId = req.body.noteId;
+    const note = await Note.findByPk(noteId);
+    note.isPinned = false;
+    await note.save();
+    res.json(note);
+  })
+);
+
 module.exports = router;

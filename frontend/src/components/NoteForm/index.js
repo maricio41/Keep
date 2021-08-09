@@ -26,6 +26,16 @@ const NoteForm = () => {
     <section>
       <div>
         <form onSubmit={handleSubmit}>
+          {isPinned && (
+            <button type="button" onClick={() => setIsPinned(false)}>
+              Unpin Note
+            </button>
+          )}
+          {!isPinned && (
+            <button type="button" onClick={() => setIsPinned(true)}>
+              Pin Note
+            </button>
+          )}
           <input
             type="text"
             placeholder="Title"

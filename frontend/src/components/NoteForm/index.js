@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserNote } from "../../store/notes";
 import Button from "@material-ui/core/Button";
+import ArchiveIcon from "@material-ui/icons/Archive";
+import ArchiveOutlinedIcon from "@material-ui/icons/ArchiveOutlined";
 import "./NoteForm.css";
 
 const NoteForm = () => {
@@ -24,31 +26,48 @@ const NoteForm = () => {
   };
   return (
     <section>
-      <div>
-        <form onSubmit={handleSubmit}>
-          {isPinned && (
-            <button type="button" onClick={() => setIsPinned(false)}>
-              Unpin Note
-            </button>
-          )}
-          {!isPinned && (
-            <button type="button" onClick={() => setIsPinned(true)}>
-              Pin Note
-            </button>
-          )}
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-          <input
-            type="text"
-            placeholder="Take a note"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></input>
-          <Button type="submit">Close</Button>
+      <div className="note-form-container">
+        <form className="note-form" onSubmit={handleSubmit}>
+          <div className="top-strip">
+            <input
+              className="title-input"
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
+            <div className="pin-btn">
+              {isPinned && (
+                <button type="button" onClick={() => setIsPinned(false)}>
+                  <i class="fa-solid fa-thumbtack"></i>
+                </button>
+              )}
+              {!isPinned && (
+                <button type="button" onClick={() => setIsPinned(true)}>
+                  <i class="fa-solid fa-thumbtack"></i>
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="content-box">
+            <input
+              className="content-input"
+              type="text"
+              placeholder="Take a note..."
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            ></input>
+          </div>
+          <div className="bottom-strip">
+            <div className="icon-container">
+              <div>O</div>
+              <div>O</div>
+              <div>
+                <ArchiveOutlinedIcon></ArchiveOutlinedIcon>
+              </div>
+            </div>
+            <Button type="submit">Close</Button>
+          </div>
         </form>
       </div>
     </section>

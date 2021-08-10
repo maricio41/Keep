@@ -1,5 +1,24 @@
 .sidebar-container {
-  border: 1px solid black;
-  width: 350px;
-  height: 500px;
+  background-color: #fff;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: column;
+
+  height: calc(100% - 64px);
+  min-height: auto;
+  overflow: hidden;
+  padding-top: 8px;
+  position: fixed;
+  top: 64px;
+
+  transition-duration: 150ms;
+
+  transition-property: width, box-shadow, border-radius;
+
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  width: 280px;
+  z-index: 985;
 }

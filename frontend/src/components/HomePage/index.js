@@ -31,10 +31,7 @@ const HomePage = () => {
   };
   return (
     <section id="homepage-section">
-      <div className="hp-sidebar">
-        <SideBar />
-      </div>
-      <div className="hp-">
+      <div className="hp-noteform">
         <NoteForm />
       </div>
       <div className="homepage-container">

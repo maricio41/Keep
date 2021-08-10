@@ -1,7 +1,5 @@
 .homepage-section {
-  height: 100vh;
-  display: grid;
-  grid-template: auto lfr auto / auto lfr auto;
+  box-sizing: border-box;
 }
 
 .homepage-container {
@@ -9,7 +7,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   padding: 100px;
-  grid-column: 2 / 6;
+  margin-left: 210px;
 }
 
 .note-card {
@@ -20,4 +18,28 @@
   padding: 5px;
   margin-right: 70px;
   margin-bottom: 70px;
+}
+
+.hp-sidebar {
+  grid-column: 1 / 2;
+}
+.hp-noteform {
+  width: 600px;
+  margin: 32px auto 16px auto;
+  position: relative;
+  background-color: #fff;
+  border-color: #e0e0e0;
+  border: 1px solid transparent;
+
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+
+  border-radius: 8px;
+
+  transition-duration: 0.218s;
+
+  transition-property: background, border, opacity, box-shadow, transform;
+
+  transition-timing-function: ease-in;
 }

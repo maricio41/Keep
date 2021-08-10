@@ -1,0 +1,33 @@
+.note-form-container {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.note-form {
+}
+
+.top-strip {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content-box {
+}
+
+.bottom-strip {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  width: 350px;
+  padding: 3px;
+}

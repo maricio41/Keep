@@ -3,4 +3,8 @@
 ::after,
 ::before {
   box-sizing: border-box;
+  color: #202124;
+  direction: ltr;
+  font-family: "Roboto", arial, sans-serif;
+  font-size: 15px;
 }

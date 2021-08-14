@@ -17,8 +17,10 @@ const HomePage = () => {
     if (!user) {
       return;
     }
-    dispatch(getUserNotes(user.id));
-  }, [noteLength, dispatch]);
+    if (!notes) {
+      dispatch(getUserNotes(user.id));
+    }
+  }, [notes]);
 
   const handlePin = (noteId) => {
     dispatch(pinNote(noteId));

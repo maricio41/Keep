@@ -13,7 +13,7 @@ router.get(
       where: {
         userId,
       },
-      order: [["createdAt", "asc"]],
+      order: [["createdAt", "desc"]],
       include: User,
     });
     res.json(notes);
@@ -46,7 +46,9 @@ router.patch(
   "/:noteId(\\dt+)/edit",
   asyncHandler(async (req, res) => {
     const { title, content, noteId } = req.body;
-    const note = await Note.findByPk(noteId);
+    const note = await Note.findByPk(noteId, {
+      include: User,
+    });
     const updatedNote = note.update({
       title: title,
       content: content,
@@ -70,7 +72,9 @@ router.patch(
   "/pin",
   asyncHandler(async (req, res) => {
     const noteId = req.body.noteId;
-    const note = await Note.findByPk(noteId);
+    const note = await Note.findByPk(noteId, {
+      include: User,
+    });
     note.isPinned = true;
     await note.save();
     res.json(note);
@@ -80,7 +84,9 @@ router.patch(
   "/unpin",
   asyncHandler(async (req, res) => {
     const noteId = req.body.noteId;
-    const note = await Note.findByPk(noteId);
+    const note = await Note.findByPk(noteId, {
+      include: User,
+    });
     note.isPinned = false;
     await note.save();
     res.json(note);

@@ -62,10 +62,12 @@ export const pinNote = (noteId) => async (dispatch) => {
   if (!response.ok) {
     throw response;
   } else {
+    console.log("Dispatching pinNote");
     const note = await response.json();
     dispatch(patchNote(note));
   }
 };
+
 export const unPinNote = (noteId) => async (dispatch) => {
   const response = await csrfFetch(`/api/notes/unpin`, {
     method: "PATCH",
@@ -74,18 +76,21 @@ export const unPinNote = (noteId) => async (dispatch) => {
   if (!response.ok) {
     throw response;
   } else {
+    console.log("Dispatching unPinNote");
     const note = await response.json();
     dispatch(patchNote(note));
   }
 };
 
-const initialState = { notes: null };
+const initialState = { notes: null, pinned: null };
 
 const notesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case GET_NOTES:
-      newState = Object.assign({}, state);
+      // newState = Object.assign({}, state);
+      newState = { ...state };
+
       newState.notes = action.payload;
       return newState;
     case ADD_NOTE:
@@ -97,9 +102,10 @@ const notesReducer = (state = initialState, action) => {
       return newState;
     case PATCH_NOTE:
       newState = Object.assign({}, state);
-      newState.notes.forEach((note) => {
+      newState.notes.forEach((note, index) => {
         if (note.id === action.payload.id) {
-          note = action.payload;
+          newState.notes[index] = action.payload;
+          console.log(action.payload);
         }
       });
       return newState;

@@ -60,8 +60,8 @@ const NoteForm = () => {
           </div>
           <div className="bottom-strip">
             <div className="icon-container">
-              <div>O</div>
-              <div>O</div>
+              <div>x</div>
+              <div>x</div>
               <div>
                 <ArchiveOutlinedIcon></ArchiveOutlinedIcon>
               </div>

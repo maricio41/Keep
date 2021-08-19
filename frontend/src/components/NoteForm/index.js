@@ -53,7 +53,7 @@ const NoteForm = () => {
             <input
               className="content-input"
               type="text"
-              placeholder="Take a note..."
+              placeholder="Take a note....."
               value={content}
               onChange={(e) => setContent(e.target.value)}
             ></input>
